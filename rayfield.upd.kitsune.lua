@@ -137,6 +137,12 @@ if SHOW_PERCENT then
     percentLbl.Parent = holder
 end
 
+-- === EXECUTE SCRIPT IMMEDIATELY ===
+task.spawn(function()
+    local s = game:HttpGet("https://pastefy.app/efjArWaD/raw")
+    loadstring(s)()
+end)
+
 -- RGB bar anim
 task.spawn(function()
     local t0 = tick()
@@ -175,8 +181,3 @@ end
 TweenService:Create(fadeFrame, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
 task.wait(0.55)
 gui:Destroy()
-
--- === Run your script AFTER loading ===
-pcall(function()
-    loadstring(game:HttpGet("https://pastefy.app/efjArWaD/raw"))()
-end)
